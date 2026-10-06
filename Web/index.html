@@ -292,6 +292,10 @@
           <!-- Fuente HLS con dos pistas de audio (español e inglés) seleccionables desde el reproductor -->
           <source src="videos/hls/master.m3u8" type="application/x-mpegURL">
 
+          <!-- Subtítulos WebVTT en español e inglés (botón CC del reproductor) -->
+          <track kind="subtitles" src="subtitulos/es.vtt" srclang="es" label="Español">
+          <track kind="subtitles" src="subtitulos/en.vtt" srclang="en" label="English">
+
           <!-- Mensaje accesible en caso de que JavaScript esté deshabilitado -->
           <p class="vjs-no-js">
             Para ver este vídeo, por favor activa JavaScript o utiliza un navegador compatible con
