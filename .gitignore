@@ -1,0 +1,6 @@
+# Archivos de sistema de macOS
+.DS_Store
+._*
+
+# Vídeo original en 4K (225 MB): supera el límite de GitHub y la web usa la versión HLS de videos/hls/
+Web/videos/Nomadia.mov
