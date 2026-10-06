@@ -453,6 +453,12 @@ main {
   backdrop-filter: blur(8px);
 }
 
+/* Subtítulos siempre por encima de la barra de controles, esté visible u oculta
+   (Video.js fija su posición al aparecer y no la recalcula cuando la barra se muestra) */
+.video-js .vjs-text-track-display {
+  bottom: 4.5em !important;
+}
+
 .video-pie {
   text-align: center;
   margin-top: 1.25rem;
