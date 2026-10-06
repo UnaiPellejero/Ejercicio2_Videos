@@ -292,9 +292,10 @@
           <!-- Fuente HLS con dos pistas de audio (español e inglés) seleccionables desde el reproductor -->
           <source src="videos/hls/master.m3u8" type="application/x-mpegURL">
 
-          <!-- Subtítulos WebVTT en español e inglés (botón CC del reproductor) -->
+          <!-- Subtítulos WebVTT para el audio en español (por defecto). Al cambiar a audio en inglés,
+               el script del final carga la pareja de subtítulos correspondiente a ese audio. -->
           <track kind="subtitles" src="subtitulos/es.vtt" srclang="es" label="Español">
-          <track kind="subtitles" src="subtitulos/en.vtt" srclang="en" label="English">
+          <track kind="subtitles" src="subtitulos/en-desde-es.vtt" srclang="en" label="English">
 
           <!-- Mensaje accesible en caso de que JavaScript esté deshabilitado -->
           <p class="vjs-no-js">
@@ -313,5 +314,46 @@
 
   <!-- Script oficial de Video.js -->
   <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
+  <!-- Subtítulos según el audio: cada audio tiene su guion, así que los subtítulos
+       se transcriben o traducen a partir del audio que está sonando -->
+  <script>
+    const SUBTITULOS_POR_AUDIO = {
+      es: { es: 'subtitulos/es.vtt',          en: 'subtitulos/en-desde-es.vtt' },
+      en: { es: 'subtitulos/es-desde-en.vtt', en: 'subtitulos/en.vtt' }
+    };
+    const ETIQUETAS = { es: 'Español', en: 'English' };
+
+    videojs('nomadia-video').ready(function () {
+      const player = this;
+      let audioActual = 'es';
+
+      function cambiarSubtitulos() {
+        const audio = Array.from(player.audioTracks()).find(pista => pista.enabled);
+        if (!audio || !SUBTITULOS_POR_AUDIO[audio.language] || audio.language === audioActual) {
+          return;
+        }
+        audioActual = audio.language;
+
+        // Se mantiene el idioma de subtítulos que el usuario tenía activado (si había alguno)
+        const subtitulos = Array.from(player.remoteTextTracks()).filter(pista => pista.kind === 'subtitles');
+        const activo = subtitulos.find(pista => pista.mode === 'showing');
+        const idiomaActivo = activo ? activo.language : null;
+
+        subtitulos.forEach(pista => player.removeRemoteTextTrack(pista));
+        Object.entries(SUBTITULOS_POR_AUDIO[audioActual]).forEach(([idioma, src]) => {
+          player.addRemoteTextTrack({
+            kind: 'subtitles',
+            src: src,
+            srclang: idioma,
+            label: ETIQUETAS[idioma],
+            mode: idioma === idiomaActivo ? 'showing' : 'disabled'
+          }, false);
+        });
+      }
+
+      player.audioTracks().on('change', cambiarSubtitulos);
+    });
+  </script>
 </body>
 </html>
