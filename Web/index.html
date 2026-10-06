@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nōmadia - Galería de Viajes</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Video.js Stylesheet desde CDN oficial -->
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Cabecera con logotipo SVG accesible -->
+  <header class="header">
+    <img src="NomadiaSinTexto.svg" alt="Logotipo de Nōmadia" class="logo">
+    <h1>Nōmadia</h1>
+  </header>
+
+  <main>
+    <p class="descripcion">
+      En Nōmadia diseñamos viajes a medida y experiencias auténticas para almas viajeras. Descubre el mundo a través de nuestra galería de destinos.
+    </p>
+
+    <!-- 
+      GALERÍA DE FOTOGRAFÍAS:
+      - Usamos <picture> con media queries para cambiar de imagen según orientación y tamaño.
+      - Las primeras fotos tienen loading="eager" (área visible inicial).
+      - El resto tienen loading="lazy" progresivo a medida que se hace scroll.
+    -->
+    <section class="galeria">
+
+      <!-- 1. Budapest: Cambia a versión vertical en dispositivos móviles portrait con <picture> -->
+      <picture class="foto-card">
+        <!-- Media query para móviles en orientación vertical -->
+        <source media="(orientation: portrait) and (max-width: 768px)" srcset="Fotos%20comprimidas/budapest-portrait.jpg">
+        <!-- Imagen por defecto para horizontal / escritorio (Visible al inicio -> loading="eager") -->
+        <img src="Fotos%20comprimidas/budapest.jpg" alt="Puente de las Cadenas en Budapest" loading="eager">
+      </picture>
+
+      <!-- 2. Euskadi: También adaptada según orientación vertical/horizontal -->
+      <picture class="foto-card">
+        <source media="(orientation: portrait) and (max-width: 768px)" srcset="Fotos%20comprimidas/euskadi-portrait.jpg">
+        <img src="Fotos%20comprimidas/euskadi.jpg" alt="Costa de Euskadi" loading="eager">
+      </picture>
+
+      <!-- 3. New York: Imagen con anotaciones responsivas superpuestas -->
+      <div class="foto-card foto-anotada">
+        <img src="Fotos%20comprimidas/newyork.jpg" alt="Vistas de Manhattan en Nueva York" loading="eager">
+        
+        <!-- Anotación 1: Empire State (posicionada con % en CSS) -->
+        <div class="anotacion anotacion-1">
+          <span class="anotacion-punto" aria-hidden="true"></span>
+          <span class="anotacion-texto">Empire State</span>
+        </div>
+
+        <!-- Anotación 2: Skyline de la ciudad -->
+        <div class="anotacion anotacion-2">
+          <span class="anotacion-punto" aria-hidden="true"></span>
+          <span class="anotacion-texto">Skyline Manhattan</span>
+        </div>
+      </div>
+
+      <!-- 
+        A partir de aquí, las fotos están fuera del área visible inicial (below the fold).
+        Implementamos 'loading="lazy"' y 'decoding="async"' para que el navegador 
+        las descargue de forma progresiva según el usuario baja haciendo scroll.
+      -->
+
+      <!-- 4. Indonesia -->
+      <div class="foto-card">
+        <img src="Fotos%20comprimidas/indonesia.jpg" alt="Templos y paisajes de Indonesia" loading="lazy" decoding="async">
+      </div>
+
+      <!-- 5. Isla de Java -->
+      <div class="foto-card">
+        <img src="Fotos%20comprimidas/islaDeJava.jpg" alt="Volcanes en la Isla de Java" loading="lazy" decoding="async">
+      </div>
+
+      <!-- 6. Maldivas -->
+      <div class="foto-card">
+        <img src="Fotos%20comprimidas/maldivas.jpg" alt="Playas paradisíacas de Maldivas" loading="lazy" decoding="async">
+      </div>
+
+      <!-- 7. Moscú -->
+      <div class="foto-card">
+        <img src="Fotos%20comprimidas/moscu.jpg" alt="Plaza Roja y arquitectura de Moscú" loading="lazy" decoding="async">
+      </div>
+
+      <!-- 8. Río de Janeiro -->
+      <div class="foto-card">
+        <img src="Fotos%20comprimidas/rioDeJaneiro.jpg" alt="Bahía y playas de Río de Janeiro" loading="lazy" decoding="async">
+      </div>
+
+      <!-- 9. Toronto -->
+      <div class="foto-card">
+        <img src="Fotos%20comprimidas/toronto.jpg" alt="Rascacielos y torre CN de Toronto" loading="lazy" decoding="async">
+      </div>
+
+      <!-- 10. Vietnam -->
+      <div class="foto-card">
+        <img src="Fotos%20comprimidas/vietnam.jpg" alt="Bahías y barcas tradicionales en Vietnam" loading="lazy" decoding="async">
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         SECCIÓN DE INFORMACIÓN DE VIAJES DISPONIBLES
+         ========================================================= -->
+    <section class="viajes-seccion" id="viajes-disponibles">
+      <div class="seccion-header">
+        <h2>Destinos y Viajes Disponibles</h2>
+        <p class="seccion-subtitulo">
+          En Nōmadia elaboramos expediciones auténticas con itinerarios cuidados al detalle. A continuación, te presentamos los viajes actualmente disponibles en nuestro catálogo junto a una breve descripción de cada experiencia:
+        </p>
+      </div>
+
+      <div class="viajes-lista">
+        <!-- 1. Budapest: Párrafo a la izquierda, imagen a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Europa Central &bull; 5 Días / 4 Noches</span>
+            <h3>Budapest</h3>
+            <p class="viaje-sub">Hungría &bull; Arquitectura imperial &amp; Balnearios</p>
+            <p class="viaje-texto">
+              La majestuosa «Perla del Danubio» fascina por la silueta iluminada de su Parlamento, el icónico Puente de las Cadenas y el histórico Castillo de Buda. Relájate en sus famosos baños termales centenarios y sumérgete en el ambiente bohemio de sus célebres <em>ruin bars</em>.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/budapest.jpg" alt="Budapest" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 2. Euskadi: Imagen a la izquierda, párrafo a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">España &bull; 6 Días / 5 Noches</span>
+            <h3>Euskadi</h3>
+            <p class="viaje-sub">País Vasco &bull; Costa salvaje &amp; Gastronomía</p>
+            <p class="viaje-texto">
+              Una travesía inolvidable entre acantilados imponentes, playas atlánticas y frondosos valles verdes. Descubre parajes mágicos como San Juan de Gaztelugatxe y la Reserva de Urdaibai, complementados con la experiencia gastronómica de los mejores pintxos y restaurantes del mundo.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/euskadi.jpg" alt="Euskadi" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 3. Nueva York: Párrafo a la izquierda, imagen a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Norteamérica &bull; 7 Días / 6 Noches</span>
+            <h3>Nueva York</h3>
+            <p class="viaje-sub">Estados Unidos &bull; Rascacielos &amp; Cultura urbana</p>
+            <p class="viaje-texto">
+              La metrópolis por excelencia te invita a perderte entre los rascacielos de Manhattan, contemplar vistas panorámicas de ensueño desde el Empire State o el Top of the Rock, recorrer Central Park en bicicleta y sumergirte en los teatros de Broadway y la vanguardia de Brooklyn.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/newyork.jpg" alt="Nueva York" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 4. Indonesia: Imagen a la izquierda, párrafo a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Sudeste Asiático &bull; 12 Días / 11 Noches</span>
+            <h3>Indonesia</h3>
+            <p class="viaje-sub">Archipiélago &bull; Espiritualidad &amp; Naturaleza</p>
+            <p class="viaje-texto">
+              Un mosaico de más de 17.000 islas que combina una profunda espiritualidad con paisajes de cuento. Camina entre templos milenarios rodeados de jungla, admira las infinitas terrazas de arroz verde esmeralda y sumérgete en playas de aguas cristalinas llenas de vida marina.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/indonesia.jpg" alt="Indonesia" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 5. Isla de Java: Párrafo a la izquierda, imagen a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Sudeste Asiático &bull; 9 Días / 8 Noches</span>
+            <h3>Isla de Java</h3>
+            <p class="viaje-sub">Indonesia &bull; Volcanes activos &amp; Patrimonio</p>
+            <p class="viaje-texto">
+              El corazón histórico y geológico de Indonesia. Conoce de cerca la potencia del imponente volcán Monte Bromo en un amanecer inolvidable y admira los monumentales templos de Borobudur y Prambanan, auténticas joyas arquitectónicas declaradas Patrimonio de la Humanidad.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/islaDeJava.jpg" alt="Isla de Java" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 6. Maldivas: Imagen a la izquierda, párrafo a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Océano Índico &bull; 8 Días / 7 Noches</span>
+            <h3>Maldivas</h3>
+            <p class="viaje-sub">Atolones &bull; Aguas turquesas &amp; Desconexión</p>
+            <p class="viaje-texto">
+              El paraíso terrenal para quienes buscan exclusividad y descanso absoluto. Alojamientos en villas sobre el agua, playas de arena blanca resplandeciente y lagunas turquesas ideales para nadar entre tortugas marinas, mantarrayas y arrecifes coralinos multicolores.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/maldivas.jpg" alt="Maldivas" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 7. Moscú: Párrafo a la izquierda, imagen a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Europa del Este &bull; 6 Días / 5 Noches</span>
+            <h3>Moscú</h3>
+            <p class="viaje-sub">Rusia &bull; Historia monumental &amp; Cúpulas</p>
+            <p class="viaje-texto">
+              Una ciudad de escala colosal e intensa riqueza cultural. Déjate deslumbrar por los vivos colores de la Catedral de San Basilio en la legendaria Plaza Roja, la imponente fortaleza del Kremlin y las majestuosas estaciones subterráneas concebidas como verdaderos palacios para el pueblo.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/moscu.jpg" alt="Moscú" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 8. Río de Janeiro: Imagen a la izquierda, párrafo a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Sudamérica &bull; 8 Días / 7 Noches</span>
+            <h3>Río de Janeiro</h3>
+            <p class="viaje-sub">Brasil &bull; Ritmo tropical &amp; Paisajes únicos</p>
+            <p class="viaje-texto">
+              La llamada «Cidade Maravilhosa» deslumbra por el contraste entre la selva tropical de Tijuca y el Atlántico. Siente la calidez de Copacabana e Ipanema, asciende en teleférico hasta la cima del Pan de Azúcar y contempla la ciudad bajo los brazos abiertos del Cristo Redentor.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/rioDeJaneiro.jpg" alt="Río de Janeiro" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 9. Toronto: Párrafo a la izquierda, imagen a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Norteamérica &bull; 6 Días / 5 Noches</span>
+            <h3>Toronto</h3>
+            <p class="viaje-sub">Canadá &bull; Ciudad cosmopolita &amp; Grandes Lagos</p>
+            <p class="viaje-texto">
+              Dinámica, limpia y acogedora a orillas del inmenso Lago Ontario. Sube a la emblemática Torre CN para una panorámica de vértigo, explora sus distritos artísticos y gastronómicos como el Distillery District y realiza una excursión inolvidable a las vecinas Cataratas del Niágara.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/toronto.jpg" alt="Toronto" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- 10. Vietnam: Imagen a la izquierda, párrafo a la derecha -->
+        <article class="viaje-item">
+          <div class="viaje-info">
+            <span class="viaje-badge">Sudeste Asiático &bull; 11 Días / 10 Noches</span>
+            <h3>Vietnam</h3>
+            <p class="viaje-sub">Indochina &bull; Bahías kársticas &amp; Tradición</p>
+            <p class="viaje-texto">
+              Un país que conmueve por su autenticidad y belleza paisajística. Navega en un junco tradicional por las aguas esmeralda de la Bahía de Ha Long, recorre en bicicleta los arrozales de Ninh Binh y pasea por las encantadoras calles de Hoi An iluminadas por farolillos de seda artesanal.
+            </p>
+          </div>
+          <div class="viaje-foto">
+            <img src="Fotos%20comprimidas/vietnam.jpg" alt="Vietnam" loading="lazy" decoding="async">
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECCIÓN DE VÍDEO CON REPRODUCTOR VIDEO.JS
+         ========================================================= -->
+    <section class="video-seccion" id="experiencia-video">
+      <div class="seccion-header">
+        <h2>Siente la Experiencia Nōmadia</h2>
+        <p class="seccion-subtitulo">
+          Descubre en este vídeo la belleza de los océanos y los horizontes que descubrirás en tu próxima aventura con nosotros:
+        </p>
+      </div>
+
+      <!-- Contenedor responsivo del reproductor Video.js -->
+      <div class="video-wrapper">
+        <video
+          id="nomadia-video"
+          class="video-js vjs-default-skin vjs-big-play-centered"
+          controls
+          preload="auto"
+          poster="https://vjs.zencdn.net/v/oceans.png"
+          data-setup='{"fluid": true, "responsive": true, "playbackRates": [0.5, 1, 1.25, 1.5, 2]}'
+          aria-label="Vídeo de la experiencia de viajes Nōmadia"
+        >
+          <!-- Fuentes de vídeo en MP4 y WebM para máxima compatibilidad -->
+          <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+          <source src="https://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+
+          <!-- Mensaje accesible en caso de que JavaScript esté deshabilitado -->
+          <p class="vjs-no-js">
+            Para ver este vídeo, por favor activa JavaScript o utiliza un navegador compatible con
+            <a href="https://videojs.org/html5-video-support/" target="_blank" rel="noopener noreferrer">vídeo HTML5</a>.
+          </p>
+        </video>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Nōmadia. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Script oficial de Video.js -->
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+</body>
+</html>

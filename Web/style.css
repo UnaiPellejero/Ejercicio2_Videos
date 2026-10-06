@@ -1,0 +1,485 @@
+/* =========================================================
+   RESETEO BÁSICO Y VARIABLES DE DISEÑO
+   ========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* =========================================================
+   CABECERA Y LOGO SVG
+   ========================================================= */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* Logotipo SVG responsive */
+.logo {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #0f172a;
+}
+
+.descripcion {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  color: #64748b;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   GALERÍA DE FOTOS (CSS GRID RESPONSIVE)
+   Por defecto usamos un grid flexible con auto-fill
+   ========================================================= */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Contenedor individual de cada foto (soporta <div> y <picture>) */
+.foto-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 240px;
+  background-color: #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  display: block;
+}
+
+/* Ajuste de imagen para que cubra todo el contenedor sin deformarse */
+.foto-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+/* Efecto hover sutil para dar dinamismo a la galería */
+.foto-card:hover img {
+  transform: scale(1.04);
+}
+
+/* =========================================================
+   ANOTACIONES RESPONSIVAS SOBRE LA IMAGEN
+   Usamos porcentajes (%) en top y left para que el pin se
+   mantenga exactamente en el mismo punto de la foto al redimensionar.
+   ========================================================= */
+.foto-anotada {
+  position: relative;
+}
+
+.anotacion {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translate(-50%, -50%); /* Centra el punto en la coordenada exacta */
+  z-index: 2;
+  pointer-events: none; /* No bloquea clics sobre la tarjeta */
+}
+
+/* Coordenadas en porcentaje (relativas a la imagen de New York) */
+.anotacion-1 {
+  top: 36%;
+  left: 48%;
+}
+
+.anotacion-2 {
+  top: 68%;
+  left: 72%;
+}
+
+/* Punto indicador luminoso con animación */
+.anotacion-punto {
+  width: 12px;
+  height: 12px;
+  background-color: #0284c7;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  animation: pulso 2s infinite ease-in-out;
+}
+
+/* Cartelito de texto responsivo: usamos clamp() para que el tamaño de fuente escale */
+.anotacion-texto {
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Animación de latido para llamar la atención sobre el punto de interés */
+@keyframes pulso {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 7px rgba(2, 132, 199, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(2, 132, 199, 0);
+  }
+}
+
+/* =========================================================
+   MEDIA QUERIES - CAMBIOS SEGÚN TAMAÑO Y ORIENTACIÓN
+   ========================================================= */
+
+/* 1. Móviles en orientación VERTICAL (portrait): 1 sola columna amplia */
+@media (max-width: 640px) and (orientation: portrait) {
+  body {
+    padding: 1.5rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .descripcion {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .galeria {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* Fotos más altas para aprovechar la pantalla vertical del móvil */
+  .foto-card {
+    height: 280px;
+  }
+
+  .seccion-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .viajes-lista {
+    gap: 2.5rem;
+  }
+
+  .viaje-item,
+  .viaje-item:nth-child(even) {
+    flex-direction: column !important;
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .viaje-foto {
+    max-width: 100%;
+    flex: none;
+  }
+
+  .viaje-foto img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .video-wrapper {
+    border-radius: 12px;
+  }
+}
+
+/* 2. Móviles o tablets en orientación HORIZONTAL (landscape) de altura reducida */
+@media (orientation: landscape) and (max-height: 550px) {
+  body {
+    padding: 1rem 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 1.25rem;
+  }
+
+  .descripcion {
+    margin-bottom: 1.5rem;
+  }
+
+  /* 2 columnas en apaisado para aprovechar el ancho */
+  .galeria {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .foto-card {
+    height: 180px;
+  }
+}
+
+/* 3. Tablets y pantallas medianas */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .galeria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .viaje-foto {
+    flex: 0 0 220px;
+    max-width: 220px;
+  }
+
+  .viaje-foto img {
+    height: 150px;
+  }
+}
+
+/* 4. Pantallas de escritorio grandes */
+@media (min-width: 1025px) {
+  .galeria {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================
+   SECCIÓN DE INFORMACIÓN DE VIAJES DISPONIBLES
+   (Diseño alternado y limpio: sin cajas ni marcos)
+   ========================================================= */
+.viajes-seccion {
+  margin-top: 4.5rem;
+}
+
+.seccion-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.seccion-header h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.65rem;
+}
+
+.seccion-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 3px;
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+  border-radius: 2px;
+}
+
+.seccion-subtitulo {
+  max-width: 700px;
+  margin: 0.85rem auto 0;
+  color: #64748b;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Contenedor en lista vertical fluida */
+.viajes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+/* Cada destino: sin bordes, sin sombras de caja y sin fondo rectangular */
+.viaje-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Alternancia: los destinos pares (2º, 4º, 6º...) invierten la posición.
+   El 1º destino tiene párrafo a la izq e imagen a la der.
+   El 2º destino tiene imagen a la izq y párrafo a la der, y así sucesivamente. */
+.viaje-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Columna de texto */
+.viaje-info {
+  flex: 1;
+}
+
+.viaje-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0284c7;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.viaje-info h3 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.3px;
+}
+
+.viaje-sub {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.viaje-texto {
+  font-size: 1rem;
+  color: #334155;
+  line-height: 1.7;
+}
+
+/* Columna de imagen pequeña */
+.viaje-foto {
+  flex: 0 0 260px;
+  max-width: 260px;
+}
+
+.viaje-foto img {
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.12), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.viaje-foto img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 14px 28px -4px rgba(2, 132, 199, 0.2), 0 6px 10px -2px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================================
+   SECCIÓN DE VÍDEO CON REPRODUCTOR VIDEO.JS
+   ========================================================= */
+.video-seccion {
+  margin-top: 5rem;
+}
+
+.video-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.14), 0 10px 15px -5px rgba(15, 23, 42, 0.07);
+  border: 1px solid #e2e8f0;
+  background-color: #0b1120;
+}
+
+/* Personalización del reproductor Video.js para coincidir con la marca */
+.video-js {
+  font-family: inherit;
+  width: 100%;
+}
+
+.video-js .vjs-big-play-button {
+  background-color: rgba(2, 132, 199, 0.9) !important;
+  border: 2px solid rgba(255, 255, 255, 0.85) !important;
+  border-radius: 50% !important;
+  width: 2.3em !important;
+  height: 2.3em !important;
+  line-height: 2.2em !important;
+  margin-top: -1.15em !important;
+  margin-left: -1.15em !important;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.45);
+  transition: all 0.25s ease !important;
+}
+
+.video-js:hover .vjs-big-play-button {
+  background-color: #0284c7 !important;
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.65);
+}
+
+.video-js .vjs-play-progress {
+  background-color: #0284c7 !important;
+}
+
+.video-js .vjs-volume-level {
+  background-color: #0284c7 !important;
+}
+
+.video-js .vjs-control-bar {
+  background-color: rgba(15, 23, 42, 0.88) !important;
+  backdrop-filter: blur(8px);
+}
+
+.video-pie {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.video-pie a {
+  color: #0284c7;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.video-pie a:hover {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   PIE DE PÁGINA
+   ========================================================= */
+.footer {
+  text-align: center;
+  margin-top: 4.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
