@@ -274,7 +274,7 @@
       <div class="seccion-header">
         <h2>Siente la Experiencia Nōmadia</h2>
         <p class="seccion-subtitulo">
-          Descubre en este vídeo la belleza de los océanos y los horizontes que descubrirás en tu próxima aventura con nosotros:
+          Descubre en este vídeo algunos de los destinos que te esperan en tu próxima aventura con nosotros. Puedes verlo en español o en inglés:
         </p>
       </div>
 
@@ -284,14 +284,13 @@
           id="nomadia-video"
           class="video-js vjs-default-skin vjs-big-play-centered"
           controls
-          preload="auto"
-          poster="https://vjs.zencdn.net/v/oceans.png"
+          preload="metadata"
+          poster="videos/nomadia-poster.jpg"
           data-setup='{"fluid": true, "responsive": true, "playbackRates": [0.5, 1, 1.25, 1.5, 2]}'
           aria-label="Vídeo de la experiencia de viajes Nōmadia"
         >
-          <!-- Fuentes de vídeo en MP4 y WebM para máxima compatibilidad -->
-          <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-          <source src="https://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+          <!-- Fuente HLS con dos pistas de audio (español e inglés) seleccionables desde el reproductor -->
+          <source src="videos/hls/master.m3u8" type="application/x-mpegURL">
 
           <!-- Mensaje accesible en caso de que JavaScript esté deshabilitado -->
           <p class="vjs-no-js">
