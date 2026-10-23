@@ -459,6 +459,52 @@ main {
   bottom: 4.5em !important;
 }
 
+/* =========================================================
+   GALERÍA DE VÍDEOS ORIGINALES (SIN OPTIMIZAR)
+   Grid flexible: 3 columnas en escritorio, 1 en móvil
+   ========================================================= */
+.videos-originales {
+  margin-top: 5rem;
+}
+
+.galeria-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.video-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+.video-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #0b1120;
+}
+
+.video-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+}
+
+.video-card figcaption strong {
+  color: #0f172a;
+  font-size: 1rem;
+}
+
+.video-card figcaption span {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
 .video-pie {
   text-align: center;
   margin-top: 1.25rem;
